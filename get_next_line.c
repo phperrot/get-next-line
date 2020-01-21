@@ -18,29 +18,29 @@ static char		*ft_find_nl(char **temp)
 	char		*memory;
 
 	memory = NULL;
-	stock_long = ft_strdup((char*)temp);
-	if (ft_strchr(*temp, '\n'))
+	stock_long = ft_strdup_gnl((char*)temp);
+	if (ft_strchr_gnl(*temp, '\n'))
 	{
 		free(stock_long);
 		stock_long = NULL;
-		stock_long = ft_strsub(*temp, 0, (ft_strlen(*temp)\
-						- ft_strlen(ft_strchr(*temp, '\n'))));
-		memory = ft_strdup(ft_strchr(*temp, '\n') + 1);
+		stock_long = ft_strsub_gnl(*temp, 0, (ft_strlen_gnl(*temp)\
+						- ft_strlen_gnl((char*)ft_strchr_gnl(*temp, '\n'))));
+		memory = ft_strdup_gnl(ft_strchr_gnl(*temp, '\n') + 1);
 		free(*temp);
 		*temp = NULL;
-		*temp = (char *)ft_strdup(stock_long);
+		*temp = (char *)ft_strdup_gnl(stock_long);
 	}
 	free(stock_long);
 	return (memory);
 }
 
-char			*ft_join_free(char *s1, char *s2)
+char			*ft_join_free_gnl(char *s1, char *s2)
 {
 	char		*tmp;
 
-	tmp = ft_strdup(s1);
+	tmp = ft_strdup_gnl(s1);
 	free(s1);
-	s1 = ft_strjoin(s2, tmp);
+	s1 = ft_strjoin_gnl(s2, tmp);
 	free(tmp);
 	free(s2);
 	s2 = NULL;
@@ -64,14 +64,14 @@ static int		ft_read(int fd, char **temp)
 		buffer[ret] = '\0';
 		if (*temp)
 		{
-			tmp = ft_strdup(*temp);
+			tmp = ft_strdup_gnl(*temp);
 			free(*temp);
-			*temp = ft_strjoin(tmp, buffer);
+			*temp = ft_strjoin_gnl(tmp, buffer);
 			free(tmp);
 		}
 		else
-			*temp = ft_strdup(buffer);
-		check = ((ft_strchr(buffer, '\n')) ? 0 : 1);
+			*temp = ft_strdup_gnl(buffer);
+		check = ((ft_strchr_gnl(buffer, '\n')) ? 0 : 1);
 	}
 	return (ret);
 }
@@ -88,21 +88,21 @@ int				get_next_line(const int fd, char **line)
 	static char	*memor;
 	int			ret;
 
-	temp = ft_strdup("\0");
+	temp = ft_strdup_gnl("\0");
 	ret = ft_read(fd, &temp);
 	if (ret < 0 || fd < 0 || !(line) || BUFFER_SIZE <= 0)
 		return (str_free(temp, -1));
-	temp = (memor != NULL) ? ft_join_free(temp, memor) : temp;
+	temp = (memor != NULL) ? ft_join_free_gnl(temp, memor) : temp;
 	memor = NULL;
-	if ((ret == 0 && !ft_strchr(temp, '\n') && !ft_strchr(memor, '\n')))
+	if ((ret == 0 && !ft_strchr_gnl(temp, '\n') && !ft_strchr_gnl(memor, '\n')))
 	{
-		*line = ft_strdup(temp);
+		*line = ft_strdup_gnl(temp);
 		return (str_free(temp, 0));
 	}
 	if (ret >= 0)
 	{
 		memor = ft_find_nl(&temp);
-		*line = ft_strdup(temp);
+		*line = ft_strdup_gnl(temp);
 	}
 	return (str_free(temp, 1));
 }

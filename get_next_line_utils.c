@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char					*ft_strsub(char *str, int start, int len)
+char					*ft_strsub_gnl(char *str, int start, int len)
 {
 	int					i;
 	char				*output;
@@ -31,7 +31,7 @@ char					*ft_strsub(char *str, int start, int len)
 	return (output);
 }
 
-size_t					ft_strlen(const char *s)
+size_t					ft_strlen_gnl(const char *s)
 {
 	int					i;
 
@@ -43,7 +43,7 @@ size_t					ft_strlen(const char *s)
 	return (i);
 }
 
-char					*ft_strchr(const char *s, int c)
+char					*ft_strchr_gnl(const char *s, int c)
 {
 	int					i;
 	char				*tmp;
@@ -71,7 +71,7 @@ char					*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char					*ft_strdup(const char *s1)
+char					*ft_strdup_gnl(const char *s1)
 {
 	char				*output;
 	int					i;
@@ -79,7 +79,7 @@ char					*ft_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	size = ft_strlen(s1);
+	size = ft_strlen_gnl(s1);
 	if (!(output = malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	i = 0;
@@ -92,7 +92,7 @@ char					*ft_strdup(const char *s1)
 	return (output);
 }
 
-char					*ft_strjoin(char const *s1, char const *s2)
+char					*ft_strjoin_gnl(char const *s1, char const *s2)
 {
 	unsigned long		i;
 	char				*output;
@@ -101,8 +101,8 @@ char					*ft_strjoin(char const *s1, char const *s2)
 
 	if (!(s1 && s2))
 		return (NULL);
-	size1 = ft_strlen(s1);
-	size2 = ft_strlen(s2);
+	size1 = ft_strlen_gnl(s1);
+	size2 = ft_strlen_gnl(s2);
 	if (!(output = malloc(sizeof(char) * (size1 + size2 + 1))))
 		return (NULL);
 	i = 0;
